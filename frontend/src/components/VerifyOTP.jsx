@@ -25,7 +25,7 @@ const VerifyOTP = ({setOpenModal}) => {
 const handleResendOTP = async () => {
   try {
    
-    const res =  await axios.post("https://oauthbackend-qp0c.onrender.com/api/v1/auth/sendOTP", {
+    const res =  await axios.post("https://oauthapp-8l6w.onrender.com/api/v1/auth/sendOTP", {
       email: verifyOTPState.email,
     });
     if(res.data.success){
@@ -43,7 +43,7 @@ const handleResendOTP = async () => {
 const handleSendOTP = async () => {
   try {
    
-    const res = await axios.post("https://oauthbackend-qp0c.onrender.com/api/v1/auth/sendOTP", {
+    const res = await axios.post("https://oauthapp-8l6w.onrender.com/api/v1/auth/sendOTP", {
       email: verifyOTPState.email, 
     });
     console.log(res);
@@ -69,7 +69,7 @@ const handleVerify = async () => {
   try {
    
     const response = await axios.post(
-      "https://oauthbackend-qp0c.onrender.com/api/v1/auth/verify",
+      "https://oauthapp-8l6w.onrender.com/api/v1/auth/verify",
       {
         otp: verifyOTPState.otp,
         email: verifyOTPState.email, 

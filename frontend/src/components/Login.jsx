@@ -65,7 +65,7 @@ const Login = () => {
     try {
       console.log(loginState);
       //   http://localhost:8800/api/v1/auth/login
-      const res = await axios.post("https://oauthbackend-qp0c.onrender.com/api/v1/auth/login", loginState);
+      const res = await axios.post("https://oauthapp-8l6w.onrender.com/api/v1/auth/login", loginState);
       if (res.data.success) {
         toast.success(`${res.data.message}`)
         navigate("/dummy")
@@ -81,10 +81,10 @@ const Login = () => {
   };
   const handleLoginWithGoogle = ()=>{
     //    http://localhost:8800
-    window.location.href = "https://oauthbackend-qp0c.onrender.com/login/federated/google"
+    window.location.href = "https://oauthapp-8l6w.onrender.com/login/federated/google"
   }
   const handleLoginWithGithub = ()=>{
-    window.location.href = "https://oauthbackend-qp0c.onrender.com/auth/github"
+    window.location.href = "https://oauthapp-8l6w.onrender.com/auth/github"
   }
   return (
     <>
