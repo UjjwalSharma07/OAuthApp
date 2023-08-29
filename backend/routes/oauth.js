@@ -14,7 +14,7 @@ const BASE_URL = process.env.BASE_URL
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: process.env.GOOGLE_REDIRECT_URL,
+  callbackURL: '/oauth2/redirect/google',
   scope: ['profile', 'email']
 }, async (accessToken, refreshToken, profile, done) => {
   try {
@@ -38,9 +38,9 @@ passport.use(new GoogleStrategy({
   }
 }));
 
-router.get(process.env.GOOGLE_LOGIN_REDIRECT_URL,passport.authenticate('google'));
+router.get('/login/federated/google',passport.authenticate('google'));
 
-router.get(process.env.GOOGLE_REDIRECT_URL, passport.authenticate('google', {
+router.get('/oauth2/redirect/google', passport.authenticate('google', {
   successRedirect: `${BASE_URL}/dummy`,
   failureRedirect: `${BASE_URL}/signup`
 }));
