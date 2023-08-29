@@ -5,7 +5,6 @@ const GitHubStrategy = require('passport-github2').Strategy;
 const UserDetails = require("../models/UserDetails");
 
 const router = express.Router();
-const BASE_URL = process.env.BASE_URL
 
 // ******************************** //
 // google authentication   //
@@ -41,8 +40,8 @@ passport.use(new GoogleStrategy({
 router.get('/login/federated/google',passport.authenticate('google'));
 
 router.get('/oauth2/redirect/google', passport.authenticate('google', {
-  successRedirect: `${BASE_URL}/dummy`,
-  failureRedirect: `${BASE_URL}/signup`
+  successRedirect: process.env.SUCCESS_REDIRECT,
+  failureRedirect: process.env.FAILURE_REDIRECT
 }));
 
 
@@ -55,7 +54,7 @@ router.get('/oauth2/redirect/google', passport.authenticate('google', {
 passport.use(new GitHubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID, 
   clientSecret: process.env.GITHUB_CLIENT_SECRET, 
-  callbackURL: "/auth/github/callback",
+  callbackURL: process.env.GITHUB_REDIRECT_URL,
   scope: ['profile', 'email']
 }, async (accessToken, refreshToken, profile, done) => {
   try {
@@ -83,9 +82,9 @@ passport.use(new GitHubStrategy({
 router.get('/auth/github', passport.authenticate('github'));
 
 router.get('/auth/github/callback', 
-  passport.authenticate('github', { failureRedirect: `${BASE_URL}/signup`}),
+  passport.authenticate('github', { failureRedirect: process.env.FAILURE_REDIRECT}),
   function(req, res) {
-    res.redirect(`${BASE_URL}/dummy`);
+    res.redirect(process.env.SUCCESS_REDIRECT);
   }
  
 );
