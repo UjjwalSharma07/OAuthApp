@@ -92,7 +92,7 @@ router.get('/auth/github/callback',
 router.post('/logout', function(req, res, next) {
   req.logout(function(err) {
     if (err) { return next(err); }
-    res.redirect(BASE_URL);
+    res.redirect(process.env.BASE_URL);
   });
 });
 
