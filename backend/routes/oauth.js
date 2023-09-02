@@ -54,7 +54,7 @@ router.get('/oauth2/redirect/google', passport.authenticate('google', {
 passport.use(new GitHubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID, 
   clientSecret: process.env.GITHUB_CLIENT_SECRET, 
-  callbackURL: process.env.GITHUB_REDIRECT_URL,
+  callbackURL: "auth/github/callback",
   scope: ['profile', 'email']
 }, async (accessToken, refreshToken, profile, done) => {
   try {
@@ -75,7 +75,7 @@ passport.use(new GitHubStrategy({
     }
   } catch (err) {
     console.error(err);
-    done({ duplicateKeyError: true }, null);
+    done(err, null);
   }
 }));
 
@@ -86,7 +86,6 @@ router.get('/auth/github/callback',
   function(req, res) {
     res.redirect(process.env.SUCCESS_REDIRECT);
   }
- 
 );
 
 router.post('/logout', function(req, res, next) {
