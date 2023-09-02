@@ -11,9 +11,9 @@ require("dotenv").config();
 
 exports.register = async (req, res, next) => {
   try {
-    const existingUser = await User.findOne({ username: req.body.username });
+    const existingUser = await User.findOne({ email: req.body.email });
     if (existingUser) {
-      return next(createError(403, "User already exists."));
+      return next(createError(403, "User already exists. Please verify your account"));
     }
 
     const salt = bcrypt.genSaltSync(10);
@@ -88,7 +88,7 @@ exports.sendOTP = async (req, res, next) => {
     if (!checkUserPresent) {
       return res.status(401).json({
         success: false,
-        message: "User not exits. Register your account.",
+        message: "User not exits. Please register your account.",
       });
     }
     // generate otp

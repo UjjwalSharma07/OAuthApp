@@ -32,3 +32,57 @@ const Input = ({
 }
 
 export default Input
+
+
+
+// const validateEmailFeilds = (formData) => {
+//   const errors = {};
+
+//   if (!formData) {
+//     errors.email = "Email or Phone is required.";
+//   } else {
+//     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//     const phonePattern = /^[0-9]{10}$/; 
+
+//     if (!emailPattern.test(formData) && !phonePattern.test(formData)) {
+//       errors.email = "Invalid email or phone format.";
+//     } else {
+//       errors.email = "";
+//     }
+//   }
+
+//   return errors;
+// };
+
+// const validateOtpField = (formData) => {
+//   const errors = {};
+
+//   if (!formData) {
+//     errors.otp = "OTP is required.";
+//   } else if (formData.length !== 6) {
+//     errors.otp = "OTP must be 6 digits.";
+//   } else {
+//     errors.otp = ""; 
+//   }
+
+//   return errors;
+// };
+
+// const handleSubmit = (e) => {
+//   e.preventDefault();
+//   if (!otpSent) {
+//     const ValidateErrors = validateEmailFeilds(verifyOTPState.email);
+//     if (Object.keys(ValidateErrors).length === 0) {
+//       handleSendOTP();
+//     } else {
+//       setErrors(ValidateErrors);
+//     }
+//   } else {
+//     const ValidateErrors = validateOtpField(verifyOTPState.otp);
+//     if (Object.keys(ValidateErrors).length === 0) {
+//       handleVerify();
+//     }else {
+//       setErrors(ValidateErrors);
+//     }
+//   }
+// };

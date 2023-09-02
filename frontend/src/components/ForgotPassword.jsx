@@ -24,8 +24,9 @@ const ForgotPassword = ({setOpenModal}) => {
     if (Object.keys(validationErrors).length === 0) {
       
       try {
-        //    http://localhost:8800/api/v1/auth/forgotPassowrd
-        const response = await axios.post("https://oauthapp-8l6w.onrender.com/api/v1/auth/forgotPassowrd", 
+        
+        // const response = await axios.post("https://oauthapp-8l6w.onrender.com/api/v1/auth/forgotPassowrd", 
+        const response = await axios.post("http://localhost:8800/api/v1/auth/forgotPassowrd", 
           forgotPasswordState, 
         );
         if (response.data.success) {
@@ -55,7 +56,7 @@ const ForgotPassword = ({setOpenModal}) => {
         errors[field.id] = `${field.labelText} is required.`;
       }
   
-      if (field.id === "emailAddress" && formData[field.id]) {
+      if (field.id === "email" && formData[field.id]) {
         // Validate email format
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         console.log("Email:", formData[field.id]);

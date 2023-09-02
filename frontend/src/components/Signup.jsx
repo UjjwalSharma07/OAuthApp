@@ -26,24 +26,28 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validateForm(signupState);
-
+      console.log("error:", validationErrors)
     if (Object.keys(validationErrors).length === 0) {
       try {
         console.log(signupState)
         const response = await axios.post(
-          //    http://localhost:8800
-          "https://oauthapp-8l6w.onrender.com/api/v1/auth/register",
+        
+          // "https://oauthapp-8l6w.onrender.com/api/v1/auth/register",
+          "http://localhost:8800/api/v1/auth/register",
           signupState
         );
         console.log(response);
-        if (response.data.success) {
-          toast.success(`${response.data.message}`)
+        if ( response.data.success ) {
           setOpenModal(true);
+          toast.success(`${response.data.message}`)
         } else {
           console.log("Registration failed:" , response.data.message);
           toast.error(`${response.data.message}`)
         }
       } catch (error) {
+        if(error.response.data.status === 403){
+          setOpenModal(true);
+        }
         console.log("Error registering:", error);
         toast.error(`${error.response.data.message}`)
       }
@@ -55,51 +59,52 @@ const Signup = () => {
 
   const validateForm = (formData) => {
     console.log(formData)
-    const validationErrors = {};
+    const errors = {};
 
-    // Validate mobile number 
-    if (formData.phone && !/^[0-9]{10}$/.test(formData.phone)) {
-      validationErrors.phone = "Invalid Phone number.";
-    }
-    if (!formData.phone) {
-      validationErrors.phone = "Phone no. is required.";
-    }
-    if (!formData.email) {
-      validationErrors.email = "Email  is required.";
-    }
-    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email) ) {
-      // Validate email format
+    fields.forEach((field) => {
+      if (field.isRequired && !formData[field.id]) {
+        errors[field.id] = `${field.labelText} is required.`;
+      }
       
-      console.log("Email:", formData.email);
-      console.log("Pattern Test Result:",/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email));
-      validationErrors.email = "Invalid email format.";
-      console.log(validationErrors.email);
-    }
-   
-    if (!formData.username) {
-      validationErrors.username = "User name is required.";
-    }
-    if (!formData.password) {
-      validationErrors.password = "password is required.";
-    }
+      if (field.id === "email" && formData[field.id]) {
+        // Validate email format
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        console.log("Email:", formData[field.id]);
+        console.log("Pattern Test Result:", emailPattern.test(formData[field.id]));
+        
+        if (!emailPattern.test(formData[field.id])) {
+          errors[field.id] = "Invalid email format.";
+        }
+      }
+      
+      if (field.id === "password" && formData[field.id]) {
+        // Validate password length
+        if (formData[field.id].length < 6) {
+          errors[field.id] = "Password must be at least 6 characters.";
+        }
+      }
 
-    if (formData.password && formData.password.length < 6) {
-      validationErrors.password = "Password must be at least 6 characters.";
-    }
+      if (field.id === "phone" && formData[field.id] && !/^[0-9]{10}$/.test(formData.phone)) {
+        errors[field.id] = "Invalid phone number.";
+      }
 
+    });
+  
     if (formData.confirmPassword !== formData.password) {
-      validationErrors.confirmPassword = "Passwords do not match.";
+      errors.confirmPassword = "Password do not match.";
     }
 
-    return validationErrors;
+    return errors;
   };
   
   const handleLoginWithGoogle = ()=>{
-    //   http://localhost:8800
-    window.location.href = "https://oauthapp-8l6w.onrender.com/login/federated/google"
+    //   
+    // window.location.href = "https://oauthapp-8l6w.onrender.com/login/federated/google"
+    window.location.href = "http://localhost:8800/login/federated/google"
   }
   const handleLoginWithGithub = ()=>{
-    window.location.href = "https://oauthapp-8l6w.onrender.com/auth/github"
+    // window.location.href = "https://oauthapp-8l6w.onrender.com/auth/github"
+    window.location.href = "http://localhost:8800/auth/github"
   }
   return (
     <>
