@@ -54,7 +54,7 @@ router.get('/oauth2/redirect/google', passport.authenticate('google', {
 passport.use(new GitHubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID, 
   clientSecret: process.env.GITHUB_CLIENT_SECRET, 
-  callbackURL: "auth/github/callback",
+  callbackURL: "https://oauthapp-8l6w.onrender.com/auth/github/callback",
   scope: ['profile', 'email']
 }, async (accessToken, refreshToken, profile, done) => {
   try {
