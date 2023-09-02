@@ -4,7 +4,7 @@ import Input from "../components/Input";
 import FormAction from "../components/FormAction";
 import axios from "axios";
 import { toast } from "react-toastify";
-
+import {BsBackspaceReverseFill} from "react-icons/bs";
 
 const fields = forgotPasswordFields;
 let fieldsState = {};
@@ -77,13 +77,16 @@ const ForgotPassword = ({setOpenModal}) => {
   
     return errors;
   };
- 
+  const handleCloseModal = () =>{
+    setOpenModal(false);
+  }
   return (
    <div className="w-screen h-screen bg-black bg-opacity-80  fixed top-0 left-0 flex justify-center items-center">
       <form
         className="bg-white-500 p-20 w-100 h-120 relative overflow-auto space-y-6"
         onSubmit={handleSubmit}
       >
+      <BsBackspaceReverseFill onClick={handleCloseModal}  className="absolute right-20 top-14  rounded-md text-white bg-purple-600 hover:bg-purple-700 cursor-pointer"/>
       <div className="-space-y-px">
         {fields.map((field) => (
           <div key={field.id} className="mb-4">
