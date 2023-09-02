@@ -32,8 +32,8 @@ const Signup = () => {
         console.log(signupState)
         const response = await axios.post(
         
-          // "https://oauthapp-8l6w.onrender.com/api/v1/auth/register",
-          "http://localhost:8800/api/v1/auth/register",
+          "https://oauthapp-8l6w.onrender.com/api/v1/auth/register",
+          // "http://localhost:8800/api/v1/auth/register",
           signupState
         );
         console.log(response);
@@ -99,12 +99,12 @@ const Signup = () => {
   
   const handleLoginWithGoogle = ()=>{
     //   
-    // window.location.href = "https://oauthapp-8l6w.onrender.com/login/federated/google"
-    window.location.href = "http://localhost:8800/login/federated/google"
+    window.location.href = "https://oauthapp-8l6w.onrender.com/login/federated/google"
+    // window.location.href = "http://localhost:8800/login/federated/google"
   }
   const handleLoginWithGithub = ()=>{
-    // window.location.href = "https://oauthapp-8l6w.onrender.com/auth/github"
-    window.location.href = "http://localhost:8800/auth/github"
+    window.location.href = "https://oauthapp-8l6w.onrender.com/auth/github"
+    // window.location.href = "http://localhost:8800/auth/github"
   }
   return (
     <>

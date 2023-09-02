@@ -25,10 +25,10 @@ const VerifyOTP = ({ setOpenModal }) => {
   const handleResendOTP = async (e) => {
       e.preventDefault();
       try {
-        // const res =  await axios.post("https://oauthapp-8l6w.onrender.com/api/v1/auth/sendOTP", {
-        const res = await axios.post(
-          "http://localhost:8800/api/v1/auth/sendOTP",
-          {
+        const res =  await axios.post("https://oauthapp-8l6w.onrender.com/api/v1/auth/sendOTP", {
+        // const res = await axios.post(
+        //   "http://localhost:8800/api/v1/auth/sendOTP",
+        //   {
             email: verifyOTPState.email,
           }
         );
@@ -45,14 +45,14 @@ const VerifyOTP = ({ setOpenModal }) => {
   };
 
   const handleSendOTP = async () => {
-      console.log("otp error")
+    
       try {
-        // const res = await axios.post("https://oauthapp-8l6w.onrender.com/api/v1/auth/sendOTP", {
-      console.log("otp fetch error")
+        const res = await axios.post("https://oauthapp-8l6w.onrender.com/api/v1/auth/sendOTP", {
+    
 
-        const res = await axios.post(
-          "http://localhost:8800/api/v1/auth/sendOTP",
-          {
+        // const res = await axios.post(
+        //   "http://localhost:8800/api/v1/auth/sendOTP",
+        //   {
             email: verifyOTPState.email,
           }
         );
@@ -79,8 +79,8 @@ const VerifyOTP = ({ setOpenModal }) => {
    
       try {
         const response = await axios.post(
-          // "https://oauthapp-8l6w.onrender.com/api/v1/auth/verify",
-          "http://localhost:8800/api/v1/auth/verify",
+          "https://oauthapp-8l6w.onrender.com/api/v1/auth/verify",
+          // "http://localhost:8800/api/v1/auth/verify",
           {
             otp: verifyOTPState.otp,
             email: verifyOTPState.email,
