@@ -33,7 +33,7 @@ const VerifyOTP = ({ setOpenModal }) => {
           }
         );
         if (res.data.success) {
-          toast.success("Send otp successfully");
+          toast.success("Sent OTP successfully");
         } else {
           toast.error(`${res.data.message}`);
         }

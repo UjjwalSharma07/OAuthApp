@@ -7,6 +7,7 @@ import FormAction from "./FormAction";
 import axios from "axios";
 import ForgotPassword from "./ForgotPassword";
 import { toast } from "react-toastify";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const fields = loginFields;
 let fieldsState = {};
@@ -16,7 +17,8 @@ const Login = () => {
   const [loginState, setLoginState] = useState(fieldsState);
   const [errors, setErrors] = useState({}); 
   const [openModal, setOpenModal] = useState(false); 
- 
+  const[showPassword, setShowPassword] = useState(false);
+
   const handleChange = (e) => {
     setLoginState({ ...loginState, [e.target.id]: e.target.value });
   };
@@ -96,7 +98,7 @@ const Login = () => {
     <>
     
     <form className="space-y-6" onSubmit={handleSubmit}>
-      <div className="-space-y-px">
+      <div className="-space-y-px relative">
         {fields.map((field) => (
           <div key={field.id} className="mb-4">
             <Input
@@ -106,10 +108,20 @@ const Login = () => {
               labelFor={field.labelFor}
               id={field.id}
               name={field.name}
-              type={field.type}
+              type={showPassword ? 'text' : field.type}
               isRequired={field.isRequired}
               placeholder={field.placeholder}
             />
+            <span 
+             className=  {errors['password'] ? 'absolute right-3 bottom-[52px] cursor-pointer':  'absolute right-3 bottom-[10px] cursor-pointer ' }
+             onClick={() => setShowPassword((prev) => !prev)}>
+                {showPassword ? 
+
+                (<AiOutlineEye fontSize={24} fill='#AFB2BF'/>) : 
+
+                (<AiOutlineEyeInvisible fontSize={24} fill='#AFB2BF'/>)}
+            </span>
+
             {errors[field.id] && (
               <p className="text-red-500 mt-2">{errors[field.id]}</p>
             )}

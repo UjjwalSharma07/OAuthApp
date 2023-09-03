@@ -5,7 +5,7 @@ import Input from "./Input";
 import VerifyOTP from "./VerifyOTP";
 import axios from 'axios';
 import { toast } from 'react-toastify';
-
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const fields = signupFields;
 let fieldsState = {};
@@ -14,8 +14,9 @@ console.log(fieldsState)
 const Signup = () => {
   const [signupState, setSignupState] = useState(fieldsState);
   const [errors, setErrors] = useState({});
- 
-
+  const[showPassword, setShowPassword] = useState(false);
+  const[showConfirmPassword, setShowConfirmPassword] = useState(false);
+  
   const [openModal, setOpenModal] = useState(false); 
   
   const handleChange = (e) => {
@@ -112,7 +113,7 @@ const Signup = () => {
     <form className="space-y-6" onSubmit={handleSubmit}>
       <div >
         {fields.map((field) => (
-          <div key={field.id} className="mb-4">
+          <div key={field.id} className="mb-4 relative">
             
               <Input
                 handleChange={handleChange}
@@ -121,11 +122,29 @@ const Signup = () => {
                 labelFor={field.labelFor}
                 id={field.id}
                 name={field.name}
-                type={field.type}
+                type={ field.id === 'password' ? (showPassword  ? 'text' : field.type) : (showConfirmPassword  ? 'text' : field.type)}
                 isRequired={field.isRequired}
                 placeholder={field.placeholder}
               />
-           
+              { (field.id === 'password' ) && <span 
+             className=  {errors['password'] ? 'absolute right-3 bottom-[52px] cursor-pointer':  'absolute right-3 bottom-[10px] cursor-pointer ' }
+             onClick={() => setShowPassword((prev) => !prev)}>
+                {showPassword ? 
+
+                (<AiOutlineEye fontSize={24} fill='#AFB2BF'/>) : 
+
+                (<AiOutlineEyeInvisible fontSize={24} fill='#AFB2BF'/>)}
+            </span>}
+
+            { (field.id === 'confirmPassword' ) && <span 
+             className=  {errors['confirmPassword'] ? 'absolute right-3 bottom-[52px] cursor-pointer':  'absolute right-3 bottom-[10px] cursor-pointer ' }
+             onClick={() => setShowConfirmPassword((prev) => !prev)}>
+                {showConfirmPassword ? 
+
+                (<AiOutlineEye fontSize={24} fill='#AFB2BF'/>) : 
+
+                (<AiOutlineEyeInvisible fontSize={24} fill='#AFB2BF'/>)}
+            </span>}
             {errors[field.id] && (
               <p className="text-red-500 mt-2">{errors[field.id]}</p>
             )}
