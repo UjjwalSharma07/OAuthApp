@@ -37,8 +37,10 @@ const Login = () => {
     fields.forEach((field) => {
       if (field.isRequired && !formData[field.id]) {
         errors[field.id] = `${field.labelText} is required.`;
+      }else{
+        setErrors({});
       }
-      
+  
       if (field.id === "email" && formData[field.id]) {
         // Validate email format
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
