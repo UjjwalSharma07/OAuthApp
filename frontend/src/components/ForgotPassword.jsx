@@ -36,7 +36,7 @@ const ForgotPassword = ({setOpenModal}) => {
           toast.error(`${response.data.message}`)
           setErrors({
             ...errors,
-            password: "wrong Password.",
+            password: "Wrong Password.",
           });
         }
       } catch (error) {
@@ -54,6 +54,8 @@ const ForgotPassword = ({setOpenModal}) => {
     fields.forEach((field) => {
       if (field.isRequired && !formData[field.id]) {
         errors[field.id] = `${field.labelText} is required.`;
+      }else{
+        errors[field.id]="";
       }
   
       if (field.id === "email" && formData[field.id]) {

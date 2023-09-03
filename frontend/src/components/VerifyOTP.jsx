@@ -33,13 +33,13 @@ const VerifyOTP = ({ setOpenModal }) => {
           }
         );
         if (res.data.success) {
-          toast.success("Resend otp successfully");
+          toast.success("Send otp successfully");
         } else {
           toast.error(`${res.data.message}`);
         }
       } catch (error) {
         toast.error(`${error.response.data.message}`);
-        console.log("Error resending OTP:", error);
+        console.log("Error occues in sending OTP:", error);
       }
     
   };
@@ -215,7 +215,7 @@ const VerifyOTP = ({ setOpenModal }) => {
       {verifyOTPState.resendEnabled && (
         <button
           onClick={handleResendOTP}
-          className="text-red-500 bold cursor-pointer"
+          className="text-red-500 font-bold cursor-pointer"
         >
           Resend OTP
         </button>

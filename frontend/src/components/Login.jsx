@@ -77,7 +77,7 @@ const Login = () => {
       
     } catch (error) {
       toast.error(`${error.response.data.message}`)
-      console.log("error occurs in login: ",error);
+      console.log("Error occurs in login: ",error);
     }
   };
   const handleLoginWithGoogle = ()=>{

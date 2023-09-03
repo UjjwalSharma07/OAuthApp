@@ -103,7 +103,7 @@ const forgotPasswordFields = [
         id:"confirmPassword",
         name:"confirmPassword",
         type:"password",
-        autoComplete:"confirmPassword",
+        autoComplete:"current-password",
         isRequired:true,
         placeholder:"Confirm Password"   
     }
