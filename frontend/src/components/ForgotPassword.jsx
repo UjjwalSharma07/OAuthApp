@@ -55,7 +55,7 @@ const ForgotPassword = ({setOpenModal}) => {
       if (field.isRequired && !formData[field.id]) {
         errors[field.id] = `${field.labelText} is required.`;
       }else{
-        errors[field.id]="";
+        errors = {};
       }
   
       if (field.id === "email" && formData[field.id]) {
