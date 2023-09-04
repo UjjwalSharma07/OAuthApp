@@ -5,6 +5,7 @@ import FormAction from "../components/FormAction";
 import axios from "axios";
 import { toast } from "react-toastify";
 import {BsBackspaceReverseFill} from "react-icons/bs";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const fields = forgotPasswordFields;
 let fieldsState = {};
@@ -13,6 +14,8 @@ fields.forEach((field) => (fieldsState[field.id] = ""));
 const ForgotPassword = ({setOpenModal}) => {
   const [forgotPasswordState, setForgotPasswordState] = useState(fieldsState);
   const [errors, setErrors] = useState({});
+  const[showPassword, setShowPassword] = useState(false);
+  const[showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleChange = (e) => {
     setForgotPasswordState({ ...forgotPasswordState, [e.target.id]: e.target.value });
@@ -24,7 +27,6 @@ const ForgotPassword = ({setOpenModal}) => {
     if (Object.keys(validationErrors).length === 0) {
       
       try {
-        
         const response = await axios.post("https://oauthapp-8l6w.onrender.com/api/v1/auth/forgotPassowrd", 
         // const response = await axios.post("http://localhost:8800/api/v1/auth/forgotPassowrd", 
           forgotPasswordState, 
@@ -91,7 +93,7 @@ const ForgotPassword = ({setOpenModal}) => {
       <BsBackspaceReverseFill onClick={handleCloseModal}  className="absolute right-20 top-14  rounded-md text-white bg-purple-600 hover:bg-purple-700 cursor-pointer"/>
       <div className="-space-y-px">
         {fields.map((field) => (
-          <div key={field.id} className="mb-4">
+          <div key={field.id} className="mb-4 relative">
             <Input
               handleChange={handleChange}
               value={forgotPasswordState[field.id]}
@@ -99,10 +101,29 @@ const ForgotPassword = ({setOpenModal}) => {
               labelFor={field.labelFor}
               id={field.id}
               name={field.name}
-              type={field.type}
+              type={ field.id === 'newpassword' ? (showPassword  ? 'text' : field.type) : (showConfirmPassword  ? 'text' : field.type)}
               isRequired={field.isRequired}
               placeholder={field.placeholder}
             />
+            { (field.id === 'newpassword' ) && <span 
+             className=  {errors['newpassword'] ? 'absolute right-3 bottom-[52px] cursor-pointer':  'absolute right-3 bottom-[10px] cursor-pointer ' }
+             onClick={() => setShowPassword((prev) => !prev)}>
+                {showPassword ? 
+
+                (<AiOutlineEye fontSize={24} fill='#AFB2BF'/>) : 
+
+                (<AiOutlineEyeInvisible fontSize={24} fill='#AFB2BF'/>)}
+            </span>}
+
+            { (field.id === 'confirmPassword' ) && <span 
+             className=  {errors['confirmPassword'] ? 'absolute right-3 bottom-[52px] cursor-pointer':  'absolute right-3 bottom-[10px] cursor-pointer ' }
+             onClick={() => setShowConfirmPassword((prev) => !prev)}>
+                {showConfirmPassword ? 
+
+                (<AiOutlineEye fontSize={24} fill='#AFB2BF'/>) : 
+
+                (<AiOutlineEyeInvisible fontSize={24} fill='#AFB2BF'/>)}
+            </span>}
             {errors[field.id] && (
               <p className="text-red-500 mt-2">{errors[field.id]}</p>
             )}
