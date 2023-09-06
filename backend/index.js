@@ -14,7 +14,7 @@ const BASE_URL = process.env.BASE_URL
 require('dotenv').config();
 
 //middlewares
-app.use(cors({ origin: `${BASE_URL}` }));
+app.use(cors(`${BASE_URL}`));
 
 app.use(cookieParser());
 app.use(express.json());

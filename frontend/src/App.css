@@ -1,3 +1,11 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+
+input:invalid[focused = "true"] ~ span {
+    display: block;
+}
+input:invalid[focused = "true"]  {
+    border: 1px solid red;
+}

@@ -1,5 +1,5 @@
 import Header from "../components/Header";
-import Login from "../components/Login";
+import LoginForm from "../components/LoginForm";
 
 const LoginPage = () => {
   return (
@@ -10,7 +10,7 @@ const LoginPage = () => {
         linkName="Signup"
         linkUrl="/signup"
       />
-      <Login/>
+      <LoginForm/>
     </>
   );
 };

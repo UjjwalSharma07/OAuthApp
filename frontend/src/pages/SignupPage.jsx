@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../components/Header";
-import Signup from "../components/Signup";
+import SignUpForm from "../components/SignUpForm";
 
 const SignupPage = () => {
   return (
@@ -11,7 +11,7 @@ const SignupPage = () => {
         linkName="Login"
         linkUrl="/"
       />
-      <Signup />
+      <SignUpForm/>
     </>
   );
 };

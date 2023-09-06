@@ -106,7 +106,7 @@ exports.sendOTP = async (req, res, next) => {
     console.log("otpBody: ", otpBody);
     
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const phonePattern = /^[0-9]{10}$/;
+    const phonePattern = /^[7-9][0-9]{9}$/;
 
     if (emailPattern.test(email)) {
       // verify by email send otp to email
