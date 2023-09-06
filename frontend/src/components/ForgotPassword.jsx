@@ -86,9 +86,9 @@ const ForgotPassword = ({ setOpenModal }) => {
     }
 
     try {
-      // const response = await axios.post("https://oauthapp-8l6w.onrender.com/api/v1/auth/forgotPassowrd",
-      const response = await axios.post(
-        "http://localhost:8800/api/v1/auth/forgotPassowrd",
+      const response = await axios.post("https://oauthapp-8l6w.onrender.com/api/v1/auth/forgotPassowrd",
+      // const response = await axios.post(
+      //   "http://localhost:8800/api/v1/auth/forgotPassowrd",
         forgotPasswordState
       );
       if (response.data.success) {
