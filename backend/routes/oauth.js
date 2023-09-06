@@ -9,7 +9,6 @@ const router = express.Router();
 // ******************************** //
 // google authentication   //
 
-
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -45,8 +44,6 @@ router.get('/oauth2/redirect/google', passport.authenticate('google', {
 }));
 
 
-
-
 // ******************************** //
 // github authentication   //
 
@@ -60,7 +57,7 @@ passport.use(new GitHubStrategy({
   try {
     console.log(profile)
     let existingUser = await UserDetails.findOne({ githubId: profile.id });
-    
+    console.log(existingUser);
     if (existingUser) {
       done(null, existingUser);
     } else {
