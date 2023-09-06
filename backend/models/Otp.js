@@ -18,7 +18,7 @@ const OTPSchema = new mongoose.Schema({
   expiresIn: {
     type: Number,
     required: true,
-    default: 5 * 60,
+    default: 5 ,
   },
 });
 

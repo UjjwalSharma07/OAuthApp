@@ -17,8 +17,9 @@ exports.verifyOTP = async (req, res, next) => {
     const recentOtp = otpEntry[0];
 
     const currentTime = new Date();
+
     const otpExpirationTime = new Date(
-      recentOtp.createdAt.getTime() + recentOtp.expiresIn * 1000
+      recentOtp.createdAt.getTime() + recentOtp.expiresIn * 60000
     );
 
     console.log("Current Time: ", currentTime);
