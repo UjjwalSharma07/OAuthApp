@@ -62,13 +62,13 @@ passport.use(new GitHubStrategy({
     if (existingUser) {
       done(null, existingUser);
     } else {
-      const email = profile.email || 'example@example.com';
+      
 
       const newUser = new UserDetails({
         githubId: profile.id,
         username: profile.username, 
         profileUrl : profile.profileUrl,
-        email: email  
+        email: profile.email  
       });
 
       const savedUser = await newUser.save();
