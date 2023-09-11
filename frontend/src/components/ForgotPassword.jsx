@@ -72,7 +72,7 @@ const ForgotPassword = ({ setOpenModal }) => {
     const isPasswordValid =
       forgotPasswordFields[1].pattern === "" ||
       new RegExp(forgotPasswordFields[1].pattern).test(
-        forgotPasswordState.password
+        forgotPasswordState.newpassword
       );
     const isConfirmPasswordValid =
       forgotPasswordFields[2].pattern === "" ||
@@ -81,6 +81,11 @@ const ForgotPassword = ({ setOpenModal }) => {
       );
 
     if (!isEmailValid || !isPasswordValid || !isConfirmPasswordValid) {
+
+      console.log("isEmailValid: ",isEmailValid)
+      console.log("isPasswordValid: ",isPasswordValid)
+      console.log("isConfirmPasswordValid: ",isConfirmPasswordValid)
+
       console.log("Invalid input. Please check the fields.");
       return;
     }
