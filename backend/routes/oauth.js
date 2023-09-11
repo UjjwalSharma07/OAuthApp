@@ -53,7 +53,7 @@ passport.use(new GitHubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID, 
   clientSecret: process.env.GITHUB_CLIENT_SECRET, 
   callbackURL: process.env.GITHUB_REDIRECT_URL,
-  scope: ['profile','email']
+  scope: ['profile','user:email']
 }, async (accessToken, refreshToken, profile, done) => {
   console.log("profile1", profile)
   try {
@@ -62,13 +62,17 @@ passport.use(new GitHubStrategy({
     if (existingUser) {
       done(null, existingUser);
     } else {
-      
+      let email = null;
 
+      if (profile.emails && profile.emails.length > 0) {
+        email = profile.emails[0].value;
+      }
+      
       const newUser = new UserDetails({
         githubId: profile.id,
         username: profile.username, 
         profileUrl : profile.profileUrl,
-        email: profile.email  
+        email: email  
       });
 
       const savedUser = await newUser.save();
