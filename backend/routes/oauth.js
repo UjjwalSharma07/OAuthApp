@@ -17,7 +17,7 @@ passport.use(new GoogleStrategy({
 }, async (accessToken, refreshToken, profile, done) => {
   try {
     console.log("profile2", profile)
-      let existingUser = await UserDetails.findOne({ googleId: profile.id });
+      let existingUser = await UserDetails.findOne({ email: profile.emails[0].value });
       console.log("existingUser", existingUser)
       if (existingUser) {
           done(null, existingUser);
@@ -53,7 +53,7 @@ passport.use(new GitHubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID, 
   clientSecret: process.env.GITHUB_CLIENT_SECRET, 
   callbackURL: process.env.GITHUB_REDIRECT_URL,
-  scope: ['profile','user:email']
+  scope: ['profile','email']
 }, async (accessToken, refreshToken, profile, done) => {
   console.log("profile1", profile)
   try {
