@@ -68,7 +68,7 @@ passport.use(new GitHubStrategy({
         authId: profile.id,
         username: profile.username, 
         profileUrl : profile.profileUrl,
-        email : profile.emails[0].value 
+        email: profile.emails && profile.emails[0] && profile.emails[0].value || ''
       });
 
       const savedUser = await newUser.save();
