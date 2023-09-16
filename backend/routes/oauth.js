@@ -23,7 +23,7 @@ passport.use(new GoogleStrategy({
           done(null, existingUser);
       } else {
           const newUser = new UserDetails({
-              googleId: profile.id,
+              authId: profile.id,
               username: profile.displayName,
               email: profile.emails[0].value 
           });
@@ -54,7 +54,7 @@ passport.use(new GitHubStrategy({
   clientSecret: process.env.GITHUB_CLIENT_SECRET, 
   callbackURL: process.env.GITHUB_REDIRECT_URL,
   scope: ['profile','email']
-  
+
 }, async (accessToken, refreshToken, profile, done) => {
   console.log("profile1", profile)
   try {
@@ -65,7 +65,7 @@ passport.use(new GitHubStrategy({
     } else {
       
       const newUser = new UserDetails({
-        githubId: profile.id,
+        authId: profile.id,
         username: profile.username, 
         profileUrl : profile.profileUrl,
         email : profile.emails[0].value 
