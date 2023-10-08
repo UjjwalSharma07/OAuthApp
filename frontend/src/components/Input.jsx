@@ -5,8 +5,15 @@ const fixedInputClass =
 
 const Input = (props) => {
   const [focused,setFocused] = useState(false);
-  const { labelText, labelFor,errorMessage, handleChange, ...inputProps } = props;
+  const { labelText, labelFor,errorMessage, handleChange,selectedFileProfile,selectedFileResume, ...inputProps } = props;
   
+
+  // const handleFileChange = (e) => {
+  //   const file = e.target.files[0];
+  //   setSelectedFile(file);
+  //   handleChange(id, file); // Pass the selected file to the parent component
+  // };
+
   const handleFocus =(e)=>{
     setFocused(true);
   }
@@ -16,6 +23,45 @@ const Input = (props) => {
       <label htmlFor={labelFor} className="sr-only">
         {labelText}
       </label>
+      {inputProps.type === 'file' ? (
+        <>
+         {inputProps.id==='profile'? (<div className="mt-1">
+            <input
+              type={inputProps.type}
+              id={inputProps.id}
+              name={inputProps.name}
+              accept="image/*"
+              onChange={handleChange}
+              className="hidden"
+            />
+            <label
+              htmlFor={inputProps.id}
+              className="cursor-pointer group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 mt-10"
+            >
+              {selectedFileProfile ? `${labelText} Selected` : `Upload ${labelText} `}
+            </label>
+            {selectedFileProfile && <p className="mt-2">{selectedFileProfile.name}</p>}
+          </div>)
+        :
+        (  <div className="mt-1">
+          <input
+            type={inputProps.type}
+            id={inputProps.id}
+            name={inputProps.name}
+            accept='.pdf, .doc, .docx'
+            onChange={handleChange}
+            className="hidden"
+          />
+          <label
+            htmlFor={inputProps.id}
+            className="cursor-pointer group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 mt-10"
+          >
+            {selectedFileResume ? `${labelText} Selected` : `Upload ${labelText} `}
+          </label>
+          {selectedFileResume && <p className="mt-2">{selectedFileResume.name}</p>}
+        </div>)}
+      </>
+      ) : (
       <input
         onChange={handleChange}
         className={fixedInputClass }
@@ -25,7 +71,8 @@ const Input = (props) => {
         {...inputProps}
        
       />
-      <span className="text-xs mt-2 hidden text-red-500" >{errorMessage}</span>
+      )}
+      <span className="text-xs mt-1 hidden text-red-500" >{errorMessage}</span>
     </div>
   );
 };

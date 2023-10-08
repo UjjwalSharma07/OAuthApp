@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LoginPage';
-import DummyPage from './pages/DummyPage';
+import UserDetailsPage from './pages/UserDetailsPage';
 
 function App() {
   
@@ -17,7 +17,7 @@ function App() {
         <Routes>
             <Route path="/" element={<LoginPage/>} />
             <Route path="/signup" element={<SignupPage/>} />
-            <Route path="/dummy" element={<DummyPage/>} />
+            <Route path="/userDetails" element={<UserDetailsPage/>} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const { createError } = require("../utils/error");
-const mailSender = require("../utils/mailSender");
+
 
 const OTPSchema = new mongoose.Schema({
   email: {

@@ -144,14 +144,13 @@ const SignUpForm = () => {
       if (error.response.data.status === 403) {
         setOpenModal(true);
       }
-      console.log("Error registering:", error);
+      console.log("Error occurs in user registration:", error);
       toast.error(`${error.response.data.message}`);
     }
   };
 
   const handleLoginWithGoogle = () => {
-    window.location.href =
-      "https://oauthapp-8l6w.onrender.com/login/federated/google";
+    window.location.href = "https://oauthapp-8l6w.onrender.com/login/federated/google";
     // window.location.href = "http://localhost:8800/login/federated/google"
   };
   const handleLoginWithGithub = () => {

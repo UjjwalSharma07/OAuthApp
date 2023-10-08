@@ -9,16 +9,22 @@ const session = require('express-session');
 const passport = require('passport');
 const MongoStore = require('connect-mongo');
 const UserDetails = require('./models/UserDetails');
+const uploadDetails = require("./routes/details");
+const cloudinary = require("./utils/cloudinary");
+const fileUpload = require("express-fileupload")
 const BASE_URL = process.env.BASE_URL
 
 require('dotenv').config();
 
 //middlewares
 app.use(cors(`${BASE_URL}`));
+// app.use(cors(`http://localhost:3000`));
 
 app.use(cookieParser());
 app.use(express.json());
 
+
+ 
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
@@ -44,7 +50,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.authenticate('session'));
 
+app.use(fileUpload({
+    useTempFiles : true,
+    tempFileDir : '/tmp/'
+}));
+
 app.use("/api/v1/auth",authRoute);
+app.use("/api/v1/user",uploadDetails);
 app.use("/",GoogleAuthRoute);
 
 app.use((err,req,res,next)=>{
@@ -60,5 +72,6 @@ app.use((err,req,res,next)=>{
 const PORT = process.env.PORT || 8800
 app.listen(PORT,()=>{
     dBconnect();
+    cloudinary.cloudinaryConnect();
     console.log("Connected to backend");
 })

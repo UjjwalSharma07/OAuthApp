@@ -47,7 +47,6 @@ const LoginForm = () => {
 
   const handleChange = (e) => {
     setLoginState({ ...loginState, [e.target.id]: e.target.value });
-    console.log(loginState);
   };
 
   const handleSubmit = async (e) => {
@@ -72,7 +71,7 @@ const LoginForm = () => {
       // const res = await axios.post("http://localhost:8800/api/v1/auth/login", loginState);
       if (res.data.success) {
         toast.success(`${res.data.message}`)
-        navigate("/dummy")
+        navigate("/userDetails",{state: {userDetails:res.data.details}})
       } else {
         console.log("Login failed:" , res.data.message);
         toast.error(`${res.data.message}`)
@@ -85,8 +84,7 @@ const LoginForm = () => {
   };
 
   const handleLoginWithGoogle = () => {
-    window.location.href =
-      "https://oauthapp-8l6w.onrender.com/login/federated/google";
+    window.location.href = "https://oauthapp-8l6w.onrender.com/login/federated/google";
     // window.location.href = "http://localhost:8800/login/federated/google"
   };
   const handleLoginWithGithub = () => {
