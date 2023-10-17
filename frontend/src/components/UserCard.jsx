@@ -9,38 +9,38 @@ import { useEffect } from "react";
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-const UserCard = () => {
-  const [data,setData] = useState(null);
-  // const navigate = useNavigate();
-  const location = useLocation();
-  const userDetails = location.state?.userDetails || null;
-  // console.log("userDetails: ",userDetails);
-  // Check if userDetails is not null before accessing its properties
-  const userEmail = userDetails ? userDetails.email : null;
-  // console.log("userEmail: ",userEmail);
+const UserCard = ({data}) => {
+  // const [data,setData] = useState(null);
+  // // const navigate = useNavigate();
+  // const location = useLocation();
+  // const userDetails = location.state?.userDetails || null;
+  // // console.log("userDetails: ",userDetails);
+  // // Check if userDetails is not null before accessing its properties
+  // const userEmail = userDetails ? userDetails.email : null;
+  // // console.log("userEmail: ",userEmail);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // const res = await axios.get('http://localhost:8800/api/v1/user/details', {
-          const res = await axios.get('https://oauthapp-8l6w.onrender.com/api/v1/user/details', {
-          params: {
-            email: userEmail,
-          },
-        });
-        console.log("fetched data", res);
-        if (res.data.success) {
-          setData(res.data.data.data); 
-        }
-      } catch (error) {
-        console.log("Error occurred while fetching userDetails:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       // const res = await axios.get('http://localhost:8800/api/v1/user/details', {
+  //         const res = await axios.get('https://oauthapp-8l6w.onrender.com/api/v1/user/details', {
+  //         params: {
+  //           email: userEmail,
+  //         },
+  //       });
+  //       console.log("fetched data", res);
+  //       if (res.data.success) {
+  //         setData(res.data.data.data); 
+  //       }
+  //     } catch (error) {
+  //       console.log("Error occurred while fetching userDetails:", error);
+  //     }
+  //   };
   
-    if (userEmail) {
-      fetchData(); 
-    }
-  }, []); 
+  //   if (userEmail) {
+  //     fetchData(); 
+  //   }
+  // }, []); 
   const handleClick = ()=>{
     toast.error(`Data Not Available. Please add link.`)
   }
@@ -53,7 +53,7 @@ const UserCard = () => {
           className="w-40 h-40 rounded-full object-cover"
         />
         <div className="flex flex-col items-start gap-3">
-          <div className="text-3xl font-bold text-red-500">  {data?.username ? data.username.charAt(0).toUpperCase() + data.username.slice(1) : ''}</div>
+          <div className="text-3xl font-bold text-red-500">  {data?.username ? data.username.charAt(0).toUpperCase() + data.username.slice(1) : 'No user found'}</div>
           <div className='flex flex-col gap-1'>
             <span className="font-semibold text-black">{data?.email}</span>
             <div className="flex items-center gap-2">

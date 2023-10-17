@@ -172,3 +172,42 @@ exports.forgotPassword = async (req, res, next) => {
     return next(createError(500, "Password reset failed. Please try again later."));
   }
 };
+
+
+
+// passport.use(new GoogleStrategy({
+//   clientID: process.env.GOOGLE_CLIENT_ID,
+//   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+//   // callbackURL: process.env.GOOGLE_REDIRECT_URL,
+//   callbackURL: "/oauth2/redirect/google",
+//   scope: ['profile', 'email']
+// }, async (accessToken, refreshToken, profile, done) => {
+//   try {
+//     console.log("profile2", profile)
+//       let existingUser = await UserDetails.findOne({ email: profile.emails[0].value });
+//       console.log("existingUser", existingUser)
+//       if (existingUser) {
+//           done(null, existingUser);
+//       } else {
+//           const newUser = new UserDetails({
+//               authId: profile.id,
+//               username: profile.displayName,
+//               email: profile.emails[0].value 
+//           });
+
+//           const savedUser = await newUser.save();
+//           done(null, savedUser);
+//       }
+//   } catch (err) {
+//       console.error(err);
+//       done(err, null);
+//   }
+// }));
+
+// router.get('/login/federated/google',passport.authenticate('google'));
+
+// router.get('/oauth2/redirect/google', passport.authenticate('google', {
+  
+//   successRedirect: process.env.SUCCESS_REDIRECT,
+//   failureRedirect: process.env.FAILURE_REDIRECT
+// }));

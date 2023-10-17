@@ -101,7 +101,7 @@ const UserDetailFields = [
   },
 ];
 
-const UserDetails = ({setOpenModal,data}) => {
+const UserDetails = ({setOpenModal,data,setData}) => {
   const [details, setDetails] = useState({
     profile: null,
     username: "",
@@ -196,7 +196,7 @@ const UserDetails = ({setOpenModal,data}) => {
         // console.log("After loop");
 
         // const response = await axios.post("http://localhost:8800/api/v1/user/detailsUpload",formData,{
-          const response = await axios.post("https://oauthapp-8l6w.onrender.com/api/v1/user/detailsUpload",formData,{
+        const response = await axios.post("https://oauthapp-8l6w.onrender.com/api/v1/user/detailsUpload",formData,{
           headers: {
             "Content-Type": "multipart/form-data",
           }
@@ -206,11 +206,38 @@ const UserDetails = ({setOpenModal,data}) => {
           setOpenModal(false);
           window.location.reload();
           toast.success(`${response.data.message}`);
+
         } else {
           console.log("userDetails error:", response.data.message);
           toast.error(`${response.data.message}`);
         }
       } catch (error) {
+        console.log("error",error);
+        console.log("error response",error.response);
+        console.log("error response status",error.response.status);
+        console.log("error response data",error.response.data);
+
+        if(error.response.status == "403"){
+          const userEmail = error.response.data.data.email;
+
+          console.log("userEmail",userEmail)
+          setOpenModal(false);
+          
+          // const res = await axios.get('http://localhost:8800/api/v1/user/details', {
+          const res = await axios.get('https://oauthapp-8l6w.onrender.com/api/v1/user/details', {
+            params: {
+              email: userEmail,
+            },
+          });
+          if (res.data.success ) {
+            console.log("res data",res.data);
+            console.log("res data data",res.data.data);
+            console.log("res data data data",res.data.data.data);
+            
+            setData(res.data.data.data); 
+          }
+        }
+        
         console.log("Error occur in upload userDetails:", error);
         toast.error(`${error.response.data.message}`);
       }
@@ -267,10 +294,10 @@ const UserDetails = ({setOpenModal,data}) => {
 
         // const response = await axios.put("http://localhost:8800/api/v1/user/editdetailsUpload",formData,{
           const response = await axios.put("https://oauthapp-8l6w.onrender.com/api/v1/user/editdetailsUpload",formData,{
-          headers: {
-            "Content-Type": "multipart/form-data",
-          }
-        });  
+            headers: {
+              "Content-Type": "multipart/form-data",
+            }
+          });  
         console.log("details response",response);
         if (response.data.success) {
           setOpenModal(false);
@@ -281,7 +308,7 @@ const UserDetails = ({setOpenModal,data}) => {
           toast.error(`${response.data.message}`);
         }
       } catch (error) {
-        console.log("Error occur in upload userDetails:", error);
+        console.log("Error occur in edit userDetails:", error);
         toast.error(`${error.response.data.message}`);
       }
   }

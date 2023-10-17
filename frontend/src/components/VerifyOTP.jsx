@@ -7,7 +7,6 @@ import { BsBackspaceReverseFill } from "react-icons/bs";
 import Input from "./Input";
 
 
-
 const VerifyOTP = ({ setOpenModal }) => {
   const [verifyOTPState, setVerifyOTPState] = useState({
     email: "",
@@ -103,8 +102,7 @@ const VerifyOTP = ({ setOpenModal }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const emailPattern =
-      /^(?=.{1,256}$)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?$/;
+    const emailPattern = /^(?=.{1,256}$)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?$/;
     const validOTP = /^\d{6}$/;
     const isEmailValid =
       emailPattern === "" ||

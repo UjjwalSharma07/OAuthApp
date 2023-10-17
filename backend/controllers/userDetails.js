@@ -29,7 +29,15 @@ exports.createUserDetails = async (req, res, next) => {
   
     const resumeFile = req.files.resume;     // Resume file
    
-
+   
+    const data = await Details.findOne({ email });
+    console.log("data",data);
+    if(data){
+      return res.status(403).json({
+        data:{email},
+        message: 'User data already exists. Please refresh this page.',
+      });
+    }
 
     // Validation for file types
     const supportedImageTypes = ['jpeg', 'png', 'jpg'];
@@ -59,7 +67,7 @@ exports.createUserDetails = async (req, res, next) => {
     const resumeUploadResponse = await uploadFileToCloudinary(resumeFile, 'CodeAteTeam');
    
     // Create a new user details entry in the database
-
+    
     const userDetails = new Details({
       profile: profileUploadResponse.secure_url,
       username,

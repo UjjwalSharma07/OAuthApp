@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const authRoute = require("./routes/auth");
 const GoogleAuthRoute = require("./routes/oauth");
+const userPayment = require("./routes/payment")
 const dBconnect = require("./db");
 const cors = require("cors");
 const cookieParser = require('cookie-parser');
@@ -57,6 +58,7 @@ app.use(fileUpload({
 
 app.use("/api/v1/auth",authRoute);
 app.use("/api/v1/user",uploadDetails);
+app.use("/api/v1/user/payment",userPayment);
 app.use("/",GoogleAuthRoute);
 
 app.use((err,req,res,next)=>{
