@@ -17,7 +17,7 @@ const BASE_URL = process.env.BASE_URL
 
 require('dotenv').config();
 
-//middlewares
+// middlewares
 app.use(cors(`${BASE_URL}`));
 // app.use(cors(`http://localhost:3000`));
 

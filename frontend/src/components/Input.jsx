@@ -40,7 +40,7 @@ const Input = (props) => {
             >
               {selectedFileProfile ? `${labelText} Selected` : `Upload ${labelText} `}
             </label>
-            {selectedFileProfile && <p className="mt-2">{selectedFileProfile.name}</p>}
+            {selectedFileProfile && <p className="mt-2 text-white">{selectedFileProfile.name}</p>}
           </div>)
         :
         (  <div className="mt-1">
@@ -58,7 +58,7 @@ const Input = (props) => {
           >
             {selectedFileResume ? `${labelText} Selected` : `Upload ${labelText} `}
           </label>
-          {selectedFileResume && <p className="mt-2">{selectedFileResume.name}</p>}
+          {selectedFileResume && <p className="mt-2 text-white">{selectedFileResume.name}</p>}
         </div>)}
       </>
       ) : (

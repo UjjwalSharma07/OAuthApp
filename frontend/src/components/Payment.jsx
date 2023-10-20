@@ -49,11 +49,11 @@ const Payment = () => {
                 name:"Codeate project",
                 description:"Test transaction",
                 image:"https://www.codeate.in/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcodeate.c28c9bc5.png&w=256&q=75",
-                "handler": function (response){
-                    alert(response.razorpay_payment_id);
-                    alert(response.razorpay_order_id);
-                    alert(response.razorpay_signature)
-                },
+                // "handler": function (response){
+                //     alert(response.razorpay_payment_id);
+                //     alert(response.razorpay_order_id);
+                //     alert(response.razorpay_signature)
+                // },
                 prefill:{
                     email:"ujjvalmishra6016@gmail.com",
                     contact:9027394386
