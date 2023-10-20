@@ -105,13 +105,13 @@ const UserDetails = ({setOpenModal,data,setData}) => {
   console.log("data",data)
   const [details, setDetails] = useState({
     profile:  null,
-    username: data.username || "",
-    email: data.email || "",
-    phone: data.phone || "",
+    username: data?.username || "",
+    email: data?.email || "",
+    phone: data?.phone || "",
     resume:  null,
-    portfolio: data.portfolio || "",
-    linkedIn: data.linkedIn || "",
-    github: data.github || "",
+    portfolio: data?.portfolio || "",
+    linkedIn: data?.linkedIn || "",
+    github: data?.github || "",
   });
   const [selectedFileProfile, setSelectedFileProfile] = useState(null);
   const [selectedFileResume, setSelectedFileResume] = useState(null);
