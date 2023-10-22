@@ -115,7 +115,7 @@ const UserDetails = ({setOpenModal,data,setData}) => {
   });
   const [selectedFileProfile, setSelectedFileProfile] = useState(null);
   const [selectedFileResume, setSelectedFileResume] = useState(null);
-  
+ 
 
   const handleChange = (e) => {
     if (e.target.type === "file") {
@@ -316,6 +316,15 @@ const UserDetails = ({setOpenModal,data,setData}) => {
   const handleCloseModal = () => {
     setOpenModal(false);
   };
+
+  const ProfileInfo = () => {
+    alert("Allowed file types: .jpg, .jpeg, .png")
+  };
+
+  const ResumeInfo = () => {
+    alert("Allowed file types: .pdf, .doc, .docx")
+  };
+
   return (
     <div className="w-screen h-screen bg-black bg-opacity-80 fixed top-0 left-0 flex  justify-center items-center">
       <form className="w-[450px] bg-white-500 h-screen py-10 relative overflow-auto space-y-6 hideScroll" onSubmit={data?handleEditSubmit:handleSubmit} encType="multipart/form-data" >
@@ -330,14 +339,41 @@ const UserDetails = ({setOpenModal,data,setData}) => {
         </h2>
         {UserDetailFields.map((input) => (
           <div key={input.id} className="mb-4 relative">
-            <Input
-              {...input}
-              handleChange={handleChange}
-              value={details[input.id]}
-              type={input.type}
-              selectedFileProfile={selectedFileProfile}
-              selectedFileResume={selectedFileResume}
-            />
+            {input.id === "profile" || input.id === "resume" ?
+             <div className=" mt-[-40px] flex  items-center gap-[20px]"> 
+
+              <Input
+                {...input}
+                handleChange={handleChange}
+                value={details[input.id]}
+                type={input.type}
+                selectedFileProfile={selectedFileProfile}
+                selectedFileResume={selectedFileResume}
+               
+              />
+              {(input.id === "profile")  && (
+                  <span onClick={  ProfileInfo } className= {(selectedFileProfile )? "w-[30px] relative top-[0px] h-[30px] text-center bg-black font-bold text-white rounded-full cursor-pointer" :"w-[30px] relative top-[20px] h-[30px] text-center bg-black font-bold text-white rounded-full cursor-pointer"} >
+                    i
+                  </span>
+              )}
+              {
+                ( input.id === "resume")  && (
+                  <span onClick={ResumeInfo } className= {(selectedFileResume ) ? "w-[30px] relative top-[0px] h-[30px] text-center bg-black font-bold text-white rounded-full cursor-pointer" :"w-[30px] relative top-[20px] h-[30px] text-center bg-black font-bold text-white rounded-full cursor-pointer"} >
+                    i
+                  </span>
+                )
+              }
+             </div>
+                :
+              <Input
+                {...input}
+                handleChange={handleChange}
+                value={details[input.id]}
+                type={input.type}
+                selectedFileProfile={selectedFileProfile}
+                selectedFileResume={selectedFileResume}
+              />
+            }
           </div>
         ))}
         <FormAction text={"SUBMIT"} />

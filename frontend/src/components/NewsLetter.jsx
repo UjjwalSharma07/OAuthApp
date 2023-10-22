@@ -5,7 +5,7 @@ import Input from "./Input";
 
 const NewsLetter = () => {
   const [email, setEmail] = useState({ email: "" });
-
+  const [err, setErr] = useState("Invalid input. Please enter a valid email address!");
   const handleChange = (e) => {
     setEmail({
       ...email,
@@ -17,12 +17,13 @@ const NewsLetter = () => {
     e.preventDefault();
 
     try {
-    //   const response = await axios.post('http://localhost:8800/api/v1/user/subscribe', email);
+      // const response = await axios.post('http://localhost:8800/api/v1/user/subscribe', email);
       const response = await axios.post('https://oauthapp-8l6w.onrender.com/api/v1/user/subscribe', email);
 
       if (response.data.success) {
         toast.success(`${response.data.message}`);
-        setEmail("");
+        setEmail({email:""});
+        setErr("");
       } else {
         toast.error(`${response.data.message}`);
       }
@@ -48,7 +49,7 @@ const NewsLetter = () => {
             required={true}
             className="justify-center  items-center rounded-md appearance-none relative block w-[300px] px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm"
             placeholder="Your email"
-            errorMessage="Invalid input. Please enter a valid email address!"
+            errorMessage={err}
             pattern="^(?=.{1,256}$)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}(?:.[a-zA-Z]{2,})?$"
           />
           <button

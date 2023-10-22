@@ -19,7 +19,7 @@ const Input = (props) => {
   }
   
   return (
-    <div className="my-5 ">
+    <div >
       <label htmlFor={labelFor} className="sr-only">
         {labelText}
       </label>
@@ -32,18 +32,18 @@ const Input = (props) => {
               name={inputProps.name}
               accept="image/*"
               onChange={handleChange}
-              className="hidden"
+              className="hidden "
             />
             <label
               htmlFor={inputProps.id}
-              className="cursor-pointer group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 mt-10"
+              className="cursor-pointer group relative w-[400px] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 mt-10"
             >
               {selectedFileProfile ? `${labelText} Selected` : `Upload ${labelText} `}
             </label>
             {selectedFileProfile && <p className="mt-2 text-white">{selectedFileProfile.name}</p>}
           </div>)
         :
-        (  <div className="mt-1">
+        (  <div >
           <input
             type={inputProps.type}
             id={inputProps.id}
@@ -54,7 +54,7 @@ const Input = (props) => {
           />
           <label
             htmlFor={inputProps.id}
-            className="cursor-pointer group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 mt-10"
+            className="cursor-pointer group relative w-[400px] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 mt-10"
           >
             {selectedFileResume ? `${labelText} Selected` : `Upload ${labelText} `}
           </label>
