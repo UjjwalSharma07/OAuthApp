@@ -19,7 +19,7 @@ const Input = (props) => {
   }
   
   return (
-    <div >
+    <div className="my-5 ">
       <label htmlFor={labelFor} className="sr-only">
         {labelText}
       </label>

@@ -128,8 +128,8 @@ const SignUpForm = () => {
     try {
       console.log(signUpState);
       const response = await axios.post(
-        "https://oauthapp-8l6w.onrender.com/api/v1/auth/register",
-        // "http://localhost:8800/api/v1/auth/register",
+        // "https://oauthapp-8l6w.onrender.com/api/v1/auth/register",
+        "http://localhost:8800/api/v1/auth/register",
         signUpState
       );
       console.log(response);
