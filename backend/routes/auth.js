@@ -10,7 +10,7 @@ const router = express.Router();
 router.post("/register",register)
 
 // sendOTP
-router.post("/sendOTP",sendOTP)
+router.post("/sendOTP",sendOTP);
 
 // verify otp
 router.post("/verify", verifyOTP);

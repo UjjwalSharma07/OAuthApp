@@ -84,8 +84,8 @@ const LoginForm = () => {
   };
 
   const handleLoginWithGoogle = () => {
-    window.location.href = "https://oauthapp-8l6w.onrender.com/login/federated/google";
-    // window.location.href = "http://localhost:8800/login/federated/google"
+    // window.location.href = "https://oauthapp-8l6w.onrender.com/login/federated/google";
+    window.location.href = "http://localhost:8800/login/federated/google"
   };
   const handleLoginWithGithub = () => {
     window.location.href = "https://oauthapp-8l6w.onrender.com/auth/github";

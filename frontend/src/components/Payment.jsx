@@ -69,11 +69,26 @@ const Payment = () => {
             paymentObject.open();
         }
         console.log("response",response)
-    }   
-    
+    }  
+    const data = {
+        name:"ujjwal",
+        amount:1,
+        number:"9027394386",
+        MUID: "MUID" + Date.now(),
+        transactionId: 'T' + Date.now(),
+    } 
+    const handlePaymnt = (e)=>{
+        
+        axios.post('https://oauthapp-8l6w.onrender.com/api/v1/user/payment/payment',{...data}).then(res=>{
+            // axios.post('http://localhost:8800/api/v1/user/payment/payment',{...data}).then(res=>{
+            console.log("payment response",res);
+        }).catch(err=>{
+            console.log("err",err);
+        })
+    }
   return (
     <div>
-      <button onClick={handleClick} className="cursor-pointer group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 mt-5 mb-5" >Payment</button>
+      <button onClick={handlePaymnt} className="cursor-pointer group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 mt-5 mb-5" >Payment</button>
     </div>
   )
 }
